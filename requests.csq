@@ -3,5 +3,4 @@
 # `#` symbol means comment. This line wont be parsed
 
 # The text below will be sent to Serial port
-led!:on
-test
+Hello world!
