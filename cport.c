@@ -39,7 +39,7 @@ void send_request(struct com_dat comport_data, char* buf)
   write(comport_data.fd, comport_data.current_command, sizeof(comport_data.current_command));
 
 
-  read(comport_data.fd, &ib, sizeof(ib));
+  read(comport_data.fd, ib, sizeof(ib));
 
   strcpy(buf, ib);
 }

@@ -7,7 +7,7 @@ struct com_dat
   int timeout;
   char config_file_path[32];
   char custom_command[32];
-  char current_command[32];
+  char current_command[256];
 
   char* saved_name;
   int saved_speed;

@@ -122,7 +122,6 @@ struct com_dat* read_toml(struct com_dat* comport_data, char* config_path)
 
 void multiple_commands_loop(struct com_dat comport_data)
 {
-  char buf[BUF_SIZE];
 
   int lines_count = 0;
 
@@ -132,12 +131,12 @@ void multiple_commands_loop(struct com_dat comport_data)
     ierrorn("Cannot read Comment Sequence file");
   }
 
+  char buf[BUF_SIZE];
   while (1)
   {
     for (int p = 0; p < lines_count; p++)
     {
       memset(&buf, '\0', sizeof(buf));
-
       // live reload config & sequence
       read_toml(&comport_data, comport_data.config_file_path);
       lines_count = read_csq(comport_data.req_file_path);
@@ -155,10 +154,9 @@ void multiple_commands_loop(struct com_dat comport_data)
         continue;
       }
 
-
       send_request(comport_data, buf);
 
-      printf("#%s%s\n\n", comport_data.current_command, buf);
+      printf("#%s\n%s\n\n", comport_data.current_command, buf);
 
       cwait(comport_data.timeout);
     }
@@ -167,6 +165,7 @@ void multiple_commands_loop(struct com_dat comport_data)
 
 void single_command_loop(struct com_dat comport_data)
 {
+
   char buf[BUF_SIZE];
   while (1)
   {
@@ -177,9 +176,8 @@ void single_command_loop(struct com_dat comport_data)
     //write(comport_data.fd, comport_data.custom_command, sizeof(comport_data.custom_command));
     send_request(comport_data, buf);
 
-    /*memset(&buf, '\0', sizeof(buf)); // clear buffer
 
-    read(comport_data.fd, &buf, sizeof(buf));*/
+    //read(comport_data.fd, &buf, sizeof(buf));
     printf("#%s\n%s\n\n", comport_data.current_command, buf);
     cwait(comport_data.timeout);
   }
