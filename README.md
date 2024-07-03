@@ -6,8 +6,8 @@ comrq is a simple serial port poller developed by andofwinds with some features 
 
 ## Compile
 ```bash
-git clone https://github.com/andofwinds/comrq.git
-cd comrq
+git clone https://github.com/andofwinds/comrq2.git
+cd comrq2
 gcc comrq.c -o comrq
 ```
 
